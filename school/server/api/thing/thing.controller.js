@@ -23,14 +23,14 @@ exports.find = function(req, res) {
   });
 };
 // Get list of things
-// exports.index = function(req, res) {
-//   Thing.find(function(err, things) {
-//     if (err) {
-//       return handleError(res, err);
-//     }
-//     return res.json(200, things);
-//   });
-// };
+exports.index = function(req, res) {
+  Thing.find(function(err, things) {
+    if (err) {
+      return handleError(res, err);
+    }
+    return res.json(200, things);
+  });
+};
 
 // Get a single thing
 // exports.show = function(req, res) {
@@ -68,14 +68,14 @@ exports.findByLine = function(req, res) {
   });
 };
 // Creates a new thing in the DB.
-// exports.create = function(req, res) {
-//   Thing.create(req.body, function(err, thing) {
-//     if (err) {
-//       return handleError(res, err);
-//     }
-//     return res.json(201, thing);
-//   });
-// };
+exports.create = function(req, res) {
+  Thing.create(req.body, function(err, thing) {
+    if (err) {
+      return handleError(res, err);
+    }
+    return res.json(201, thing);
+  });
+};
 
 exports.insert = function(req, res) {
   // ThingServer.insert(req.body, function(err, thing) {
@@ -98,26 +98,26 @@ exports.updateLine = function(req, res) {
   });
 };
 // Updates an existing thing in the DB.
-// exports.update = function(req, res) {
-//   if (req.body._id) {
-//     delete req.body._id;
-//   }
-//   Thing.findById(req.params.id, function(err, thing) {
-//     if (err) {
-//       return handleError(res, err);
-//     }
-//     if (!thing) {
-//       return res.send(404);
-//     }
-//     var updated = _.merge(thing, req.body);
-//     updated.save(function(err) {
-//       if (err) {
-//         return handleError(res, err);
-//       }
-//       return res.json(200, thing);
-//     });
-//   });
-// };
+exports.update = function(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Thing.findById(req.params.id, function(err, thing) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!thing) {
+      return res.send(404);
+    }
+    var updated = _.merge(thing, req.body);
+    updated.save(function(err) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200, thing);
+    });
+  });
+};
 exports.deleteByID=function(req,res){
   console.log(req.params.line);
   ThingServer.deleteByID(req.params.line,function(err,thing){
@@ -129,22 +129,22 @@ exports.deleteByID=function(req,res){
   });
 }
 // Deletes a thing from the DB.
-// exports.destroy = function(req, res) {
-//   Thing.findById(req.params.id, function(err, thing) {
-//     if (err) {
-//       return handleError(res, err);
-//     }
-//     if (!thing) {
-//       return res.send(404);
-//     }
-//     thing.remove(function(err) {
-//       if (err) {
-//         return handleError(res, err);
-//       }
-//       return res.send(204);
-//     });
-//   });
-// };
+exports.destroy = function(req, res) {
+  Thing.findById(req.params.id, function(err, thing) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!thing) {
+      return res.send(404);
+    }
+    thing.remove(function(err) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.send(204);
+    });
+  });
+};
 
 function handleError(res, err) {
   return res.send(500, err);
